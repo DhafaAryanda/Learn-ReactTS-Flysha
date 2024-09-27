@@ -12,6 +12,7 @@ const nextConfig = {
         hostname: "xzxlnefxkdkhwzyttkum.supabase.co",
       },
     ],
+    unoptimized: true,
   },
 };
 

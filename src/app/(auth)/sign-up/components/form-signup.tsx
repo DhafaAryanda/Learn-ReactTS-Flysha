@@ -3,7 +3,7 @@ import type { ActionResult } from "@/app/dashboard/(auth)/signin/form/actions";
 import Link from "next/link";
 import React from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import { signUpUser } from "../lib/action";
+import { signUpUser } from "../lib/actions";
 
 const initialState: ActionResult = {
   errorTitle: null,
@@ -94,7 +94,7 @@ export default function FormSignUp() {
       </div>
       <SubmitButton />
       <Link
-        href="signin.html"
+        href="/sign-in"
         className="text-center text-flysha-black hover:text-white rounded-full bg-white hover:bg-flysha-black font-semibold w-full p-[12px_30px] border border-flysha-black transition-all duration-300"
       >
         Sign In
