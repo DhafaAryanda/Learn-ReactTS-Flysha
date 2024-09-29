@@ -9,7 +9,7 @@ export default function Navbar() {
       id="Navbar"
       className="container max-w-[1130px] mx-auto flex justify-between items-center pt-[30px]"
     >
-      <Link href="index.html" className="flex items-center shrink-0">
+      <Link href="/" className="flex items-center shrink-0">
         <Image
           width={120}
           height={60}
