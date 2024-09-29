@@ -1,20 +1,8 @@
 import React from "react";
-import SeatList from "./components/seat-list";
-import FlightDetail from "./components/flight-detail";
-import { getFlightById } from "../../lib/data";
+import LoadingSeatList from "./components/loading-seat-list";
+import LoadingFlightDetail from "./components/loading-flight-detail";
 
-type Params = {
-  id: string;
-};
-
-interface ChooseSeatProps {
-  params: Params;
-}
-
-export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
-  const flight = await getFlightById(params.id);
-  console.log(flight);
-
+export default function Loading() {
   return (
     <section
       id="Chosse-Seat"
@@ -56,11 +44,12 @@ export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
                 <span className="font-semibold">Available</span>
               </div>
             </div>
-            {flight?.seats && <SeatList seats={flight.seats} />}
+
+            <LoadingSeatList />
           </div>
         </div>
       </div>
-      <FlightDetail />
+      <LoadingFlightDetail />
     </section>
   );
 }

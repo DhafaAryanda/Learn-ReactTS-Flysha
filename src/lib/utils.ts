@@ -1,9 +1,16 @@
-import type { FlightSeat, TypeSeat } from "@prisma/client";
+import type { Airplane, Flight, FlightSeat, TypeSeat } from "@prisma/client";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import dayjs from "dayjs";
 
 export const CHECKOUT_KEY = "CHECKOUT_KEY";
+
+export type Checkout = {
+  id?: string;
+  seat: TypeSeat;
+  flightDetail?: Flight & { plane: Airplane };
+  seatDetail?: FlightSeat;
+};
 
 export const SEAT_VALUES = {
   ECONOMY: {
