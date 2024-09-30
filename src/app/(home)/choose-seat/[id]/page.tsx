@@ -2,6 +2,7 @@ import React from "react";
 import SeatList from "./components/seat-list";
 import FlightDetail from "./components/flight-detail";
 import { getFlightById } from "../../lib/data";
+import { getUser } from "@/lib/auth";
 
 type Params = {
   id: string;
@@ -12,6 +13,7 @@ interface ChooseSeatProps {
 }
 
 export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
+  const { session } = await getUser();
   const flight = await getFlightById(params.id);
   console.log(flight);
 
@@ -60,7 +62,7 @@ export default async function ChooseSeatPage({ params }: ChooseSeatProps) {
           </div>
         </div>
       </div>
-      <FlightDetail />
+      {flight && <FlightDetail flight={flight} session={session} />}
     </section>
   );
 }
