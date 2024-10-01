@@ -11,7 +11,7 @@ export default function Benefits() {
             <Image
               width={32}
               height={32}
-              src="../assets/images/icons/crown-white.svg"
+              src="/assets/images/icons/crown-white.svg"
               className="w-8 h-8"
               alt="icon"
             />
@@ -26,7 +26,7 @@ export default function Benefits() {
             <Image
               width={32}
               height={32}
-              src="../assets/images/icons/shield-tick-white.svg"
+              src="/assets/images/icons/shield-tick-white.svg"
               className="w-8 h-8"
               alt="icon"
             />
@@ -41,7 +41,7 @@ export default function Benefits() {
             <Image
               width={32}
               height={32}
-              src="../assets/images/icons/building-3-white.svg"
+              src="/assets/images/icons/building-3-white.svg"
               className="w-8 h-8"
               alt="icon"
             />
