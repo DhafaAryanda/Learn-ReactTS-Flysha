@@ -1,20 +1,43 @@
+import { getUrlFile } from "@/lib/supabase";
+import { dateFormat } from "@/lib/utils";
+import type {
+  Airplane,
+  Flight,
+  FlightSeat,
+  Ticket,
+  User,
+} from "@prisma/client";
 import React from "react";
 
-export default function FlightDetail() {
+type Data = Ticket & {
+  flight: Flight & { plane: Airplane };
+  customer: User;
+  seat: FlightSeat;
+};
+
+interface FlightDetailProps {
+  data: Data;
+}
+
+export default function FlightDetail({ data }: FlightDetailProps) {
   return (
     <div className="bg-white flex flex-col rounded-[20px] w-[340px]">
       <div className="flex flex-col p-[20px_20px_25px] border-b-2 border-dotted border-flysha-grey gap-4 relative">
         <div className="flex w-[300px] h-[130px] shrink-0 rounded-[14px] overflow-hidden bg-[#EDE8F5]">
           <img
-            src="/assets/images/background/airplane.png"
+            src={getUrlFile(data.flight.plane.image)}
             className="w-full h-full object-cover"
             alt="thumbnail"
           />
         </div>
         <div className="flex justify-between items-center">
           <div className="flex flex-col gap-[2px]">
-            <p className="font-bold text-lg text-flysha-black">Angga Fly</p>
-            <p className="text-sm text-flysha-grey">AF-293 • First Class</p>
+            <p className="font-bold text-lg text-flysha-black">
+              {data.flight.plane.name}
+            </p>
+            <p className="text-sm text-flysha-grey">
+              {data.flight.plane.code} • {data.seat.type} Class
+            </p>
           </div>
           <div className="flex h-fit">
             <img
@@ -52,27 +75,34 @@ export default function FlightDetail() {
       <div className="flex flex-col gap-[10px] p-[25px_20px_20px]">
         <div className="flex justify-between text-flysha-black">
           <span>Date</span>
-          <span className="font-semibold">10 March 2024</span>
+          <span className="font-semibold">
+            {dateFormat(data.bookingDate, "DD MMM YYYY")}
+          </span>
         </div>
         <div className="flex justify-between text-flysha-black">
           <span>Time</span>
-          <span className="font-semibold">09:00 - 12:00</span>
+          <span className="font-semibold">
+            {dateFormat(data.flight.departureDate, "HH:mm")} -{" "}
+            {dateFormat(data.flight.arrivalDate, "HH:mm")}
+          </span>
         </div>
         <div className="flex justify-between text-flysha-black">
           <span>Airport</span>
-          <span className="font-semibold">CGK - PDV</span>
+          <span className="font-semibold">
+            {data.flight.departureCityCode} - {data.flight.destinationCityCode}
+          </span>
         </div>
         <div className="flex justify-between text-flysha-black">
           <span>Name</span>
-          <span className="font-semibold">Angga Risky</span>
+          <span className="font-semibold">{data.customer.name}</span>
         </div>
         <div className="flex justify-between text-flysha-black">
           <span>Seat Choosen</span>
-          <span className="font-semibold">3C</span>
+          <span className="font-semibold">{data.seat.seatNumber}</span>
         </div>
         <div className="flex justify-between text-flysha-black">
           <span>Passport No.</span>
-          <span className="font-semibold">AB2091MB</span>
+          <span className="font-semibold">{data.customer.passport}</span>
         </div>
         <div className="flex justify-between text-flysha-black">
           <span>Passenger</span>

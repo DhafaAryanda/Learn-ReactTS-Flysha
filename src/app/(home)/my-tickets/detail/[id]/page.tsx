@@ -3,8 +3,19 @@ import Navbar from "@/app/components/navbar";
 import React from "react";
 import TransactionDetail from "./components/transaction-detail";
 import FlightDetail from "./components/flight-detail";
+import { getDetailTicket } from "../../lib/data";
 
-export default function DetailTicketPage() {
+type Params = {
+  id: string;
+};
+
+interface DetailTicketProps {
+  params: Params;
+}
+
+export default async function DetailTicketPage({ params }: DetailTicketProps) {
+  const data = await getDetailTicket(params.id);
+
   return (
     <>
       <section
@@ -34,10 +45,10 @@ export default function DetailTicketPage() {
         className="container max-w-[1130px] mx-auto -mt-[33px] z-10 relative"
       >
         <div className="checkout-container flex-col lg:flex-row flex gap-[70px]">
-          <FlightDetail />
+          {data && <FlightDetail data={data} />}
           <div className="flex flex-col mt-[63px] gap-[30px]">
             <Benefits />
-            <TransactionDetail />
+            {data && <TransactionDetail data={data} />}
           </div>
         </div>
       </section>
